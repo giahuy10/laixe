@@ -236,7 +236,8 @@ switch ($task) {
 		echo json_encode($response);
 		break; // END SIGN UP
 	case "login": // START LOGIN
-			
+			$api_log = new stdClass();
+			$api_log->type= "login";
 			$username = $requests->username;
 			$password = $requests->password;
 			$db    = JFactory::getDbo();
@@ -264,20 +265,26 @@ switch ($task) {
 					$user->balance = format_price($user->balance);
 					 $user = json_encode($user);
 					echo '{"userData": ' .$user . '}';
+					$api_log->response = $user;
 				  }
 				  else
 				  {
 					  // Invalid password
 					  // Prmitive error handling
 					  echo '{"error":{"text":"Sai mật khẩu"}}';
+					  $api_log->response = "Wrong pass";
+					  $api_log->error = 1;
 				  }
 			  } else {
 				  // Invalid user
 				  // Prmitive error handling
 				 echo '{"error":{"text":"Tài khoản không tồn tại"}}';
+				 $api_log->response = "Not found account";
+				 $api_log->error = 1;
 			  }
-			
-				
+			  
+			  
+			  UberHelpersUber::save_api_log($api_log);
 
 			
 		

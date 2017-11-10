@@ -82,7 +82,11 @@ class UberHelpersUber
 			
 	
 		
-    }
+	}
+	public static function save_api_log($api){
+		$result = JFactory::getDbo()->insertObject('#__uber_api_log', $api);
+		
+	}
 	public static function sendMessage($title, $content,$player_id){
 		$headings = array(
 			"en" => $title
