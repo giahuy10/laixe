@@ -33,9 +33,7 @@ switch ($task) {
 	$hour = date('H', $hour);
 	$real_price = round(JRequest::getVar('total_price'),-3);
 	$sale_price = round(JRequest::getVar('total_sale_price'),-3);
-	if (!$sale_price) {
-		$sale_price = $real_price;
-	}
+	
 	$job = new stdClass();
 	$job->is_airport = 2;
 	
@@ -102,7 +100,9 @@ switch ($task) {
 	$job->pick_up_time=$date;
 	$job->drop_location=JRequest::getVar('end_point');
 	$job->way=JRequest::getVar('way');
-	
+	if ($sale_price !=$real_price) {
+			$job->coupon = JRequest::getVar('coupon')
+	}
 	$job->price=$real_price;
 	$job->sale_price=$sale_price;
 	$job->comment=JRequest::getVar('comment');
