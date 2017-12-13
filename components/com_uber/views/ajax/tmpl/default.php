@@ -102,6 +102,10 @@ switch ($task) {
 	$job->way=JRequest::getVar('way');
 	if ($sale_price !=$real_price) {
 			$job->coupon = JRequest::getVar('coupon');
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_URL, "http://kho.ltdvietnam.com/api.php?act=code&task=active&code=".$job->coupon);
+			curl_exec($ch);
+			curl_close($ch);
 	}
 	$job->price=$real_price;
 	$job->sale_price=$sale_price;
