@@ -101,7 +101,7 @@ switch ($task) {
 	$job->drop_location=JRequest::getVar('end_point');
 	$job->way=JRequest::getVar('way');
 	if ($sale_price !=$real_price) {
-			$job->coupon = JRequest::getVar('coupon')
+			$job->coupon = JRequest::getVar('coupon');
 	}
 	$job->price=$real_price;
 	$job->sale_price=$sale_price;
